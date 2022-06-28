@@ -16,11 +16,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
   { id: 3, name: 'José', weight: 79.3, age: '18' },
   { id: 4, name: 'Ana', weight: 55.5, age: '16' },
   { id: 5, name: 'Paula', weight: 63, age: '20' },
-  { id: 6, name: 'Carla', weight: 58, age: '32' },
-  { id: 7, name: 'Rodrigo', weight: 105, age: '29' },
-  { id: 8, name: 'João', weight: 92, age: '25' },
-  { id: 9, name: 'Bruno', weight: 75.9, age: '21' },
-  { id: 10, name: 'Belina', weight: 60.3, age: '19' },
 ];
 
 @Component({
