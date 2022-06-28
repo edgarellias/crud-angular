@@ -1,0 +1,25 @@
+<h1 *ngIf="!isChange" mat-dialog-title>Criar Usuário</h1>
+<h1 *ngIf="isChange" mat-dialog-title>Editar Usuário</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Id</mat-label>
+    <input matInput [(ngModel)]="data.id">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Nome</mat-label>
+    <input matInput [(ngModel)]="data.name">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Peso</mat-label>
+    <input matInput [(ngModel)]="data.weight">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Idade</mat-label>
+    <input matInput [(ngModel)]="data.age">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button *ngIf="!isChange" mat-button [mat-dialog-close]="data" cdkFocusInitial>Criar</button>
+  <button *ngIf="isChange" mat-button [mat-dialog-close]="data" cdkFocusInitial>Editar</button>
+</div>
