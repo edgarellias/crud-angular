@@ -1,6 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { PeriodicElement } from '../../views/home/home.component'
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
+import { PeriodicElement } from '../../models/PeriodicElement';
 
 @Component({
   selector: 'app-create-modal',
@@ -8,22 +10,36 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./create-modal.component.scss'],
 })
 export class CreateModalComponent implements OnInit {
-  element!: PeriodicElement;
   isChange!: boolean;
+  form: FormGroup;
+
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public data: PeriodicElement,
-    public dialogRef: MatDialogRef<CreateModalComponent>,
-  ) {}
+    public data: { list: PeriodicElement[]; element?: PeriodicElement },
+    public dialogRef: MatDialogRef<CreateModalComponent>
+  ) {
+    this.form = new FormGroup({
+      _id: new FormControl(null),
+      name: new FormControl(null, [Validators.required]),
+      weight: new FormControl(null, [Validators.required]),
+      age: new FormControl(null, [Validators.required]),
+    });
+  }
 
   ngOnInit(): void {
-    if(this.data.id != null){
-      this.isChange = true;
-    } else{
-      this.isChange = false;
+    this.isChange = !!this.data;
+    if (this.isChange) {
+      this.form.setValue(this.data);
+    } else {
+      this.form.controls['_id'].disable();
     }
   }
+
   onCancel(): void {
     this.dialogRef.close();
+  }
+
+  onConfirm(): void {
+    this.dialogRef.close(this.form.value);
   }
 }

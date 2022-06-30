@@ -1,25 +1,20 @@
-<h1 *ngIf="!isChange" mat-dialog-title>Criar Usuário</h1>
-<h1 *ngIf="isChange" mat-dialog-title>Editar Usuário</h1>
-<div mat-dialog-content>
-  <mat-form-field appearance="fill">
-    <mat-label>Id</mat-label>
-    <input matInput [(ngModel)]="data.id">
-  </mat-form-field>
+<h1 mat-dialog-title> {{ isChange ? 'Editar' : 'Criar'}} Usuário</h1>
+<form [formGroup]="form" mat-dialog-content>
+
   <mat-form-field appearance="fill">
     <mat-label>Nome</mat-label>
-    <input matInput [(ngModel)]="data.name">
+    <input matInput formControlName="name" />
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Peso</mat-label>
-    <input matInput [(ngModel)]="data.weight">
+    <input matInput formControlName="weight" />
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Idade</mat-label>
-    <input matInput [(ngModel)]="data.age">
+    <input matInput formControlName="age" />
   </mat-form-field>
-</div>
+</form>
 <div mat-dialog-actions>
   <button mat-button (click)="onCancel()">Cancelar</button>
-  <button *ngIf="!isChange" mat-button [mat-dialog-close]="data" cdkFocusInitial>Criar</button>
-  <button *ngIf="isChange" mat-button [mat-dialog-close]="data" cdkFocusInitial>Editar</button>
+  <button mat-button (click)="onConfirm()" cdkFocusInitial [disabled]="!form.valid">{{ isChange ? 'Editar' : 'Criar'}}</button>
 </div>
